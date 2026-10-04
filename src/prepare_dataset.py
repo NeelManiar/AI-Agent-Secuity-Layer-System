@@ -37,3 +37,21 @@ def normalize_scenario(scenario):
             "expected_policy": scenario["expected_policy"],
         }
     }
+
+def main():
+    scenarios = load_scenarios()
+
+    normalized = [
+        normalize_scenario(scenario)
+        for scenario in scenarios
+    ]
+
+    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with OUTPUT_FILE.open('w') as f:
+        json.dump(normalized,f, indent=2)
+
+    print(f'Loaded {len(scenarios)} scenarios')
+
+
+if __name__ == '__main__':
+    main()
